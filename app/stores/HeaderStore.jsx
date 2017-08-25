@@ -21,13 +21,13 @@ function HeaderStore(){
 	}
 
 	function triggerListeners(){
-		listeners.forEact(function(listener){
+		listeners.forEach(function(listener){
 			listener(items);
 		})
 	}
 
 	dispatcher.register(function(event){
-		var split = event.type.split(:);
+		var split = event.type.split(':');
 		if(split[0] === "header"){
 			switch(split[1]){
 				case "add":

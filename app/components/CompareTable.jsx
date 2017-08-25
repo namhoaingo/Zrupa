@@ -1,20 +1,33 @@
 var React = require('react');
 var ReactDom = require('react-dom')
 var Header = require('./Header.jsx')
+var Button = require('./Button.jsx')
+var HeaderStore = require('./../stores/HeaderStore.jsx')
 
 
 module.exports = React.createClass({
 	getInitialState: function(){
-        return {"First Col"};
+		var state = HeaderStore.getItems();
+		return {items: state};
+	},
+	
+	componentDidMount: function(){
+    	HeaderStore.onChange(function(items){
+			this.setState({item:HeaderStore.getItems()});
+		}.bind(this))
     },
 
 	render: function(){
 		console.log("Here");
 		return (
 				<div className="container">
-					<div>{this.state}</div>
-					<Header items={this.state}/>				
+					<Header items={this.state.items}/>	
+					<Button/>
 				</div>
+
 			)
 	}	
 })
+
+			
+

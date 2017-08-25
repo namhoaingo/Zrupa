@@ -4,7 +4,7 @@ var listeners = {};
 module.exports = {
 	register: function(callback){
 		var id = guid.raw();
-		listener[id] = callback;
+		listeners[id] = callback;
 		return id;
 	},
 
@@ -12,8 +12,8 @@ module.exports = {
 		console.log('Dispatching ..'+ payload);
 		// dispatch to all the store
 		// onyl the store which have logic will pick up
-		for(var id in listener){
-			listener[id](payload);
+		for(var id in listeners){
+			listeners[id](payload);
 		}
 	}
 
