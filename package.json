@@ -1,0 +1,32 @@
+{
+  "name": "zrupa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namhoaingo/Zrupa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namhoaingo/Zrupa/issues"
+  },
+  "homepage": "https://github.com/namhoaingo/Zrupa#readme",
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.4.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "guid": "0.0.12",
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.31",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
