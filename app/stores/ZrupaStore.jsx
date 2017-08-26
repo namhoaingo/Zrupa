@@ -14,7 +14,12 @@ function ZrupaStore(){
 	}
 
 	function addItem(item){
-		items.push(item);
+		
+		items.push({
+		header: "1",
+		productName: "ProductName1",
+		manufactor: "Manufactor1"
+	});
 		triggerListeners();
 	}
 
