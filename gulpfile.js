@@ -12,6 +12,7 @@ gulp.task('live-server', function(){
 })
 
 gulp.task('bundle', function(){
+	console.log("bundle again");
 	return browserify({
 		entries:'app/main.jsx',
 		debug:true
@@ -19,7 +20,8 @@ gulp.task('bundle', function(){
 	.transform(reactify)
 	.bundle()
 	.pipe(source('app.js'))
-	.pipe(gulp.dest('./temp'));
+	.pipe(gulp.dest('./temp'))
+	.pipe(browserSync.reload({stream: true}));
 })
 
 gulp.task('serve', ['bundle','live-server'], function(){
@@ -27,4 +29,12 @@ gulp.task('serve', ['bundle','live-server'], function(){
 		proxy:"http://localhost:8686",
 		port:8687
 	});
+})
+
+gulp.task('jsx-watch',function(){
+	gulp.watch('app/*', ['bundle']);
+})
+
+gulp.task('default', ['jsx-watch'], function(){
+	gulp.start('serve');
 })

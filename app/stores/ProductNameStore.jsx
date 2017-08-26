@@ -1,6 +1,6 @@
 var dispatcher = require('./../dispatcher.jsx');
 
-function Store(){
+function HeaderStore(){
 	var items = [{
 		text: "Area"
 	}]

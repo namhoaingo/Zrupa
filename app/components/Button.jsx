@@ -9,7 +9,6 @@ module.exports = React.createClass({
     },
 	handleInput: function(e){
 		this.setState({input: e.target.value})
-		console.log(this.state);
 	},
 
 	addItem: function(e){
@@ -20,7 +19,7 @@ module.exports = React.createClass({
 
 	render: function(){
 		return (
-				<div className="col-md-3">
+				<div className ='col-md-3'>
 					<form onSubmit={this.addItem}>
 					<input value={this.state.input} onChange={this.handleInput}/>
 					<button> Add Item </button>

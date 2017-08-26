@@ -9,12 +9,11 @@ module.exports = {
 	},
 
 	dispatch: function(payload){
-		console.log('Dispatching ..'+ payload);
+		console.log('Dissssssassstcss ..'+ payload);
 		// dispatch to all the store
 		// onyl the store which have logic will pick up
 		for(var id in listeners){
 			listeners[id](payload);
 		}
 	}
-
 }
