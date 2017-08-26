@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDom = require('react-dom');
-var action = require('./../actions/HeaderAction.jsx');
+var action = require('./../actions/ZrupaAction.jsx');
 
 
 module.exports = React.createClass({	
@@ -20,7 +20,7 @@ module.exports = React.createClass({
 
 	render: function(){
 		return (
-				<div className="col-md-3">
+				<div>
 					<form onSubmit={this.addItem}>
 					<input value={this.state.input} onChange={this.handleInput}/>
 					<button> Add Item </button>

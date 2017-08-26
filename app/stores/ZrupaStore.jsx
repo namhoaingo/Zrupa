@@ -1,8 +1,10 @@
 var dispatcher = require('./../dispatcher.jsx');
 
-function HeaderStore(){
+function ZrupaStore(){
 	var items = [{
-		text: "Area"
+		header: "Area",
+		productName: "ProductName",
+		manufactor: "Manufactor"
 	}]
 
 	var listeners = [];
@@ -44,4 +46,4 @@ function HeaderStore(){
 	}
 }
 
-module.exports = new HeaderStore();
+module.exports = new ZrupaStore();

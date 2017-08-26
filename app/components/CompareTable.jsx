@@ -2,18 +2,18 @@ var React = require('react');
 var ReactDom = require('react-dom')
 var Header = require('./Header.jsx')
 var Button = require('./Button.jsx')
-var HeaderStore = require('./../stores/HeaderStore.jsx')
+var ZrupaStore = require('./../stores/ZrupaStore.jsx')
 
 
 module.exports = React.createClass({
 	getInitialState: function(){
-		var state = HeaderStore.getItems();
+		var state = ZrupaStore.getItems();
 		return {items: state};
 	},
 	
 	componentDidMount: function(){
-    	HeaderStore.onChange(function(items){
-			this.setState({item:HeaderStore.getItems()});
+    	ZrupaStore.onChange(function(items){
+			this.setState({item:ZrupaStore.getItems()});
 		}.bind(this))
     },
 
