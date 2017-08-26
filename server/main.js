@@ -14,7 +14,7 @@ app.use(parser.json());
 app.use(parser.urlencoded({extended:false}));
 
 var productRoute = require('./routes/products.js')(express);
-app.use('/api/', productRoute);
+app.use('/api/products/', productRoute);
 
 
 

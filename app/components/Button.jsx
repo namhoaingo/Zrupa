@@ -9,13 +9,11 @@ module.exports = React.createClass({
     },
 	handleInput: function(e){
 		this.setState({input: e.target.value})
-		console.log(this.state);
 	},
 
 	addItem: function(e){
 		e.preventDefault();
 		action.add({text: this.state.input});
-		this.setState({input:''})
 	},
 
 	render: function(){

@@ -6,18 +6,27 @@ var ZrupaStore = require('./../stores/ZrupaStore.jsx')
 
 module.exports = React.createClass({
 	getInitialState: function(){
-		var state = ZrupaStore.getItems();
-		return {items: state};
+		//var state = ZrupaStore.getItems();
+
+		return {
+			items: [
+						{
+							header: "Area",
+							productName: "ProductName",
+							manufactor: "Manufactor"
+						}
+					]
+				};
 	},
 	
 	componentDidMount: function(){
     	ZrupaStore.onChange(function(items){
-			this.setState({item:ZrupaStore.getItems()});
+    		console.log("onchange");
+			this.setState({items:ZrupaStore.getItems()});
 		}.bind(this))
     },
 
 	render: function(){
-		console.log("Here");
 		return (
 				<div className="container">
 					<div className="row">

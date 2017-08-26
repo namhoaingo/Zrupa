@@ -1,29 +1,31 @@
 var dispatcher = require('./../dispatcher.jsx');
+var productApi = require('./../apiHelper/productsAPI.js');
 
 function ZrupaStore(){
-	var items = [{
-		header: "Area",
-		productName: "ProductName",
-		manufactor: "Manufactor"
-	}]
+	var items = [];
 
+	
+ 	
 	var listeners = [];
 
-	function getItems(){
+	function getItems(){		
+		console.log(items);
 		return items;
 	}
 
 	function addItem(item){
 		// call API to get Data
-
-
 		// Todo: convert to real thing 		
-		items.push({
-			header: "1",
-			productName: "ProductName1",
-			manufactor: "Manufactor1"
-	});
-		triggerListeners();
+		productApi.post('/api/products', item).then(function(data){
+			console.log("client  post product api");
+			triggerListeners();
+		});
+
+		// items.push({
+		// 	header: "1",
+		// 	productName: "ProductName1",
+		// 	manufactor: "Manufactor1"
+		// });
 	}
 
 	function onChange(listener){
@@ -45,9 +47,12 @@ function ZrupaStore(){
 					break;
 			}
 		}
-
 	})
 
+	productApi.get('/api/products/').then(function(data){		
+			 items = data;			 
+        	 triggerListeners();
+	});
 	return {
 		getItems: getItems,
 		onChange: onChange
