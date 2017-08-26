@@ -4,7 +4,7 @@ module.exports = {
 	add: function(item){
 		dispatcher.dispatch({
 			payload: item,
-			type:"header:add"
+			type:"product-url:add"
 		})
 	}
 }

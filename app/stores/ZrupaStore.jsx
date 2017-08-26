@@ -14,11 +14,14 @@ function ZrupaStore(){
 	}
 
 	function addItem(item){
-		
+		// call API to get Data
+
+
+		// Todo: convert to real thing 		
 		items.push({
-		header: "1",
-		productName: "ProductName1",
-		manufactor: "Manufactor1"
+			header: "1",
+			productName: "ProductName1",
+			manufactor: "Manufactor1"
 	});
 		triggerListeners();
 	}
@@ -35,7 +38,7 @@ function ZrupaStore(){
 
 	dispatcher.register(function(event){
 		var split = event.type.split(':');
-		if(split[0] === "header"){
+		if(split[0] === "product-url"){
 			switch(split[1]){
 				case "add":
 					addItem(event.payload);
