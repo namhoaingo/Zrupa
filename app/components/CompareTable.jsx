@@ -54,6 +54,90 @@ module.exports = React.createClass({
 											)	
 										})	
 									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.image}</div>
+												</div>																				
+											)	
+										})	
+									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.warranty_term}</div>
+												</div>																				
+											)	
+										})	
+									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.warranty_type}</div>
+												</div>																				
+											)	
+										})	
+									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.productContent}</div>
+												</div>																				
+											)	
+										})	
+									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.price}</div>
+												</div>																				
+											)	
+										})	
+									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.whatInTheBox}</div>
+												</div>																				
+											)	
+										})	
+									}
+									</div>
+
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											return (
+												<div className="col-md-3">
+													<div> {item.specs}</div>
+												</div>																				
+											)	
+										})	
+									}
 									</div>							
 															
 						</div>
