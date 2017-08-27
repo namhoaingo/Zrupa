@@ -14,13 +14,14 @@ module.exports = React.createClass({
 	addItem: function(e){
 		e.preventDefault();
 		action.add({text: this.state.input});
+		this.setstate({input: ""})
 	},
 
 	render: function(){
 		return (
 				<div>
 					<form onSubmit={this.addItem}>
-					<input value={this.state.input} onChange={this.handleInput}/>
+					<input id='search-box' value={this.state.input} onChange={this.handleInput}/>
 					<button> Add Item </button>
 			</form>
 				</div>

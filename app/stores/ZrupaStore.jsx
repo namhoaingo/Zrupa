@@ -1,5 +1,6 @@
 var dispatcher = require('./../dispatcher.jsx');
 var productApi = require('./../apiHelper/productsAPI.js');
+var _ = require("underscore");
 
 function ZrupaStore(){
 	var items = {}; 	
@@ -13,7 +14,6 @@ function ZrupaStore(){
 		// call API to get Data
 		// Todo: convert to real thing 		
 		productApi.post('/api/products', item).then(function(data){			
-			console.log(data);
 			items = data;
 			triggerListeners();
 		});
@@ -27,6 +27,7 @@ function ZrupaStore(){
 		listeners.forEach(function(listener){
 			listener(items);
 		})
+
 	}
 
 	dispatcher.register(function(event){

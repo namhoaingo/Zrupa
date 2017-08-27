@@ -1,153 +1,189 @@
 var React = require('react');
 var ReactDom = require('react-dom')
-var Button = require('./Button.jsx')
-var ZrupaStore = require('./../stores/ZrupaStore.jsx')
+var ZrupaStore = require('./../stores/ZrupaStore.jsx');
+var _ = require("underscore");
 
 
 module.exports = React.createClass({
 	getInitialState: function(){
-		//var state = ZrupaStore.getItems();
-
 		return {
-			items: [
-						{
-							header: "Area",
-							productName: "ProductName",
-							manufactor: "Manufactor"
-						}
-					]
-				};
+			items: null
+		}
 	},
-	
+
 	componentDidMount: function(){
     	ZrupaStore.onChange(function(items){
     		console.log("onchange");
-			this.setState({items:ZrupaStore.getItems()});
+			this.setState({items:items});
 		}.bind(this))
     },
 
-	render: function(){
-		return (
-				<div className="container">
+    getColumnWidth: function(index){
+    	return index==0 ? 'col-md-2 text-bold': 'col-md-4';
+    },
+
+    renderEmpty: function(){
+    	return (
+    		<div className="container">
+    			<div className="text-center">
+    			Please Enter Url 
+    			</div>
+    		</div>
+    		)
+    },    
+
+    renderReady: function(){
+    	return (
+				<div className="container">					
 					<div className="row">
-						<div className="col-md-9">							
-								
+						<div className="col-md-12">			
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
 											return (
-												<div className="col-md-3">
-													<div> {item.header}</div>
+												<div className={columnCss} key={item.productUrl}>
+													<a href={item.productUrl}> Link </a>
 												</div>																				
 											)	
-										})
-									}	
-									</div>		
+										}.bind(this))	
+									}
+									</div>
 
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
 											return (
-												<div className="col-md-3">
+												<div className={columnCss} key={item.productName}>
 													<div> {item.productName}</div>
 												</div>																				
 											)	
-										})	
+										}.bind(this))	
 									}
 									</div>
 
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
 											return (
-												<div className="col-md-3">
-													<div> {item.image}</div>
+												<div className={columnCss} key={item.image}>
+													<div> 
+													<image src={item.image}/>
+													</div>
 												</div>																				
 											)	
-										})	
+										}.bind(this))	
 									}
 									</div>
 
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
 											return (
-												<div className="col-md-3">
+												<div className={columnCss} key={'warranty_term'+item.productName}>
 													<div> {item.warranty_term}</div>
 												</div>																				
 											)	
-										})	
+										}.bind(this))	
 									}
 									</div>
-
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
 											return (
-												<div className="col-md-3">
+												<div className={columnCss} key={"warranty_type" + item.productName}>
 													<div> {item.warranty_type}</div>
 												</div>																				
 											)	
-										})	
+										}.bind(this))	
 									}
 									</div>
 
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
 											return (
-												<div className="col-md-3">
-													<div> {item.productContent}</div>
+												<div className={columnCss} key={"productContent" + item.productName}>													
+													{ 
+														item.productContent.map(function(productContentData, index){															
+																return (
+																	<div key={productContentData.content}> 
+																		{productContentData.content}
+																	</div>
+																)
+														})														
+													}
 												</div>																				
 											)	
-										})	
+										}.bind(this))	
 									}
 									</div>
 
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
-											return (
-												<div className="col-md-3">
-													<div> {item.price}</div>
-												</div>																				
-											)	
-										})	
-									}
-									</div>
-
-									<div className="row">
-									{
-										this.state.items.map(function(item, index){
-											return (
-												<div className="col-md-3">
-													<div> {item.whatInTheBox}</div>
-												</div>																				
-											)	
-										})	
-									}
-									</div>
-
-									<div className="row">
-									{
-										this.state.items.map(function(item, index){
-											return (
-												<div className="col-md-3">
-													<div> {item.specs}</div>
-												</div>																				
-											)	
-										})	
-									}
-									</div>							
+											if(index == 0)
+											{
+												return (
+													<div className="col-md-2" key={"specs" + item.productName}>													
+														{ 
+															item.specs.map(function(spec, index){
+																return (
+																	<div key={item.productName + spec.specName} className="text-bold"> 
+																		{spec.specName}
+																	</div>	
+																)	
+															})											
+														}
+													</div>			
+												)	
+											}
+											else
+											{
+												return (
+												<div className="col-md-4" key={"specs" + item.productName}>													
+													{ 
+														item.specs.map(function(spec, index){
 															
-						</div>
-						<div className="col-md-3">
-								<Button/>
-						</div>
+																return (
+																	<div className="row">
+																		<div className="col-md-4 text-underline" key={item.productName + spec.specName}> 
+																			{spec.specName}
+																		</div>
+																		<div className="col-md-8" key={item.productName + spec.specDetail}> 
+																			{spec.specDetail}
+																		</div>
+																	</div>
+																)
+														})														
+													}
+												</div>																				
+												)	
+											}
+
+										})	
+									}
+									</div>
+						</div>						
 					</div>
 				</div>
 
 			)
+    },
+
+	render: function(){
+		if(_.isEmpty(this.state.items)){
+			return this.renderEmpty()
+		}
+		else{
+			return this.renderReady()
+		}
+
 	}	
 })
 
