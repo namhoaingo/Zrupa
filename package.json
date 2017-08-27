@@ -23,9 +23,12 @@
     "cheerio": "^1.0.0-rc.2",
     "cheerio-req": "^1.1.4",
     "ejs": "^2.5.7",
+    "enzyme": "^2.9.1",
+    "expect": "^1.20.2",
     "express": "^4.15.4",
     "guid": "0.0.12",
     "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
     "gulp-live-server": "0.0.31",
     "jquery": "^3.2.1",
     "react": "^15.6.1",
@@ -37,6 +40,10 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "gulp-concat-css": "^2.3.0"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-mocha": "^4.3.1",
+    "react-addons-test-utils": "^15.0.0-rc.2"
   }
 }
