@@ -38,48 +38,52 @@ module.exports = {
 		
 			var promises= [];
 			_.each(inputs, function(element, index){
-				promises.push(						
-					scrape(element.url, 
-					{ 						
-						productName: selector.productName,
-					    image: {
-					    	selector: selector.image.selector,
-					    	attr: selector.image.attr
-					    },
-					    warranty_type: selector.warranty_type,
-					    warranty_term: selector.warranty_term,
-					    productContent: {
-					    	listItem: selector.productContent.lists,
-					    	data:{
-					    		content: {
-					    			selector: selector.productContent.content
-					    		}
-					    	}
-					    },
-					    productPrice: selector.price,
-					    whatInTheBox: {
-					    	listItem: selector.whatInTheBox.lists,
-					    	data:{
-					    		content: {
-					    			selector: selector.whatInTheBox.content
-					    		}
-					    	}
-					    },
-					    specs: {
-					    	listItem: selector.specs.lists,
-					    	data: {
-					    		specName: {
-					    			selector: 'td',
-					    			eq: selector.specs.content.specName,
-					    		},
-					    		specDetail:
-					    		{ 
-					    			selector: 'td',
-					    			eq: selector.specs.content.specDetail
-					    		}
-					    	}
-					    }
-					})	
+				promises.push(
+					{ 
+						productUrl: element.url,
+						promise:	
+							scrape(element.url, 
+							{ 						
+								productName: selector.productName,
+							    image: {
+							    	selector: selector.image.selector,
+							    	attr: selector.image.attr
+							    },
+							    warranty_type: selector.warranty_type,
+							    warranty_term: selector.warranty_term,
+							    productContent: {
+							    	listItem: selector.productContent.lists,
+							    	data:{
+							    		content: {
+							    			selector: selector.productContent.content
+							    		}
+							    	}
+							    },
+							    productPrice: selector.price,
+							    whatInTheBox: {
+							    	listItem: selector.whatInTheBox.lists,
+							    	data:{
+							    		content: {
+							    			selector: selector.whatInTheBox.content
+							    		}
+							    	}
+							    },
+							    specs: {
+							    	listItem: selector.specs.lists,
+							    	data: {
+							    		specName: {
+							    			selector: 'td',
+							    			eq: selector.specs.content.specName,
+							    		},
+							    		specDetail:
+							    		{ 
+							    			selector: 'td',
+							    			eq: selector.specs.content.specDetail
+							    		}
+							    	}
+							    }
+							})	
+					}
 				);				
 			})
 			

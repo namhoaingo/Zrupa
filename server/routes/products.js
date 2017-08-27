@@ -53,12 +53,19 @@ module.exports = function(express){
 		{
 			var promises = productsManager.scrapProductUrl(validationResults);		
 
-			Promise.all(promises).then(function(data){
-				console.log(data);			
-				console.log("------------------------------------");
-				results = results.concat(data);
-				console.log(results);
-				res.status(200).send(results);
+			var count = 0;
+			_.each(promises, function(item){				
+				item.promise.then(function(data)
+				{
+					count = count + 1;
+					data.productUrl = item.productUrl
+					results.push(data);
+					console.log(results);
+					if(promises.length == count)
+					{
+						res.status(200).send(results);
+					}
+				})
 			})			
 		}		
 	});

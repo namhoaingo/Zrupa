@@ -41,11 +41,23 @@ module.exports = React.createClass({
 									{
 										this.state.items.map(function(item, index){
 											var columnCss = this.getColumnWidth(index);
-											return (
+											if(index == 0)
+											{
+												return (
 												<div className={columnCss} key={item.productUrl}>
-													<a href={item.productUrl}> Link </a>
+													<div> Link </div>
+												</div>																				
+												)		
+											}
+											else{
+												return (
+												<div className={columnCss} key={item.productUrl}>
+													<a href={item.productUrl} target="_blank"> Link </a>
 												</div>																				
 											)	
+											}
+
+											
 										}.bind(this))	
 									}
 									</div>
