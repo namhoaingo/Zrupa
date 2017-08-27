@@ -1,14 +1,55 @@
 var dispatcher = require('./../dispatcher.jsx');
 var productApi = require('./../apiHelper/productsAPI.js');
 var _ = require("underscore");
+var validator = require("validator");
 
 function ZrupaStore(){
 	var items = {}; 	
+	var validationResults = [];
+
 	var listeners = [];
 
 	function getItems(){
 		return items;
 	}
+
+	function getValidationsResult(){
+		return validationResults;
+	}
+
+	function validate(textUrl){	
+		var productsUrls = textUrl.text.split(",");
+		// clear out for a new validation
+		validationResults = [];
+		_.each(productsUrls, function(url){
+			if(!validator.isURL(url))
+			{
+				validationResults.push({
+					productUrl: url,
+					validationResult: "Invalid URL"
+				})
+			}
+
+			if(_.find(items, function(item){ return item.productUrl == url}))
+			{
+				validationResults.push({
+					productUrl: url,
+					validationResult: "Duplicate URL"
+				})
+			}
+		})
+
+		if(validationResults.length > 0)
+		{
+			triggerListeners();	
+		}
+		else
+		{
+			addItem(textUrl);
+		}
+
+	}
+
 
 	function addItem(item){
 		// call API to get Data
@@ -25,7 +66,7 @@ function ZrupaStore(){
 
 	function triggerListeners(){
 		listeners.forEach(function(listener){
-			listener(items);
+			listener(validationResults, items);
 		})
 
 	}
@@ -35,7 +76,7 @@ function ZrupaStore(){
 		if(split[0] === "product-url"){
 			switch(split[1]){
 				case "add":
-					addItem(event.payload);
+					validate(event.payload);
 					break;
 			}
 		}
@@ -47,7 +88,9 @@ function ZrupaStore(){
 	});
 	return {
 		getItems: getItems,
-		onChange: onChange
+		getValidationsResult: getValidationsResult,
+		onChange: onChange,
+
 	}
 }
 

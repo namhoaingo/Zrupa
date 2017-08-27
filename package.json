@@ -27,6 +27,7 @@
     "guid": "0.0.12",
     "gulp": "^3.9.1",
     "gulp-live-server": "0.0.31",
+    "jquery": "^3.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "reactify": "^1.1.1",

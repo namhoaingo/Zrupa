@@ -7,14 +7,17 @@ var _ = require("underscore");
 module.exports = React.createClass({
 	getInitialState: function(){
 		return {
-			items: null
+			items: [],
+			validationResults: []
 		}
 	},
 
 	componentDidMount: function(){
-    	ZrupaStore.onChange(function(items){
-    		console.log("onchange");
-			this.setState({items:items});
+    	ZrupaStore.onChange(function(validationResults, items){
+    		console.log("onchange");			
+			if(validationResults.length == 0){
+				this.setState({items:items});	
+			}
 		}.bind(this))
     },
 
@@ -22,11 +25,10 @@ module.exports = React.createClass({
     	return index==0 ? 'col-md-2 text-bold': 'col-md-4';
     },
 
-    renderEmpty: function(){
+    renderPleaseEnterUrl: function(){
     	return (
     		<div className="container">
     			<div className="text-center">
-    			Please Enter Url 
     			</div>
     		</div>
     		)
@@ -78,14 +80,27 @@ module.exports = React.createClass({
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
-											var columnCss = this.getColumnWidth(index);
-											return (
-												<div className={columnCss} key={item.image}>
-													<div> 
-													<image src={item.image}/>
-													</div>
-												</div>																				
-											)	
+											var columnCss = this.getColumnWidth(index);											
+											if(index==0)
+												{
+													return(
+														<div className={columnCss} key="titleImage">
+															<div> 
+																{item.image}
+															</div>
+														</div>	
+														)
+												}
+												else
+												{
+													return ( 
+														<div className={columnCss} key={'actualImage_'+item.productName}>															
+															<div> 															
+																<img src={item.image}/>
+															</div>
+														</div>
+													)
+												}											
 										}.bind(this))	
 									}
 									</div>
@@ -190,8 +205,8 @@ module.exports = React.createClass({
 
 	render: function(){
 		if(_.isEmpty(this.state.items)){
-			return this.renderEmpty()
-		}
+			return this.renderPleaseEnterUrl()
+		}		
 		else{
 			return this.renderReady()
 		}
