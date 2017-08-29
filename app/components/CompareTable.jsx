@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDom = require('react-dom')
 var ZrupaStore = require('./../stores/ZrupaStore.jsx');
 var _ = require("underscore");
+var Controllers = require('./Controllers.jsx')
 
 
 module.exports = React.createClass({
@@ -38,7 +39,31 @@ module.exports = React.createClass({
     	return (
 				<div className="container">					
 					<div className="row">
-						<div className="col-md-12">			
+						<div className="col-md-12">
+									<div className="row">
+									{
+										this.state.items.map(function(item, index){
+											var columnCss = this.getColumnWidth(index);
+											if(index == 0)
+											{
+												return (
+												<div className={columnCss} key={item.id}>
+												
+												</div>																				
+												)		
+											}
+											else{
+												return (
+												<div className={columnCss} key={item.id}>
+													<Controllers itemId={item.id}/>
+												</div>																				
+											)	
+											}
+											
+										}.bind(this))	
+									}
+									</div>
+			
 									<div className="row">
 									{
 										this.state.items.map(function(item, index){
