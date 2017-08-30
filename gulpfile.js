@@ -6,6 +6,7 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var concatCss = require('gulp-concat-css');
 var less = require('gulp-less');
+var shell = require('gulp-shell');
 
 var mocha = require('gulp-mocha');
 var babel = require('babel-core/register');
@@ -46,12 +47,5 @@ gulp.task('default', ['bundle','css','live-server', 'less'], function(){
 	});
 })
 
-
-gulp.task('mocha', function() {
-    return gulp.src(['test/*.js'])
-        .pipe(mocha({
-            compilers: {
-                js: babel
-            }
-        }));
-});
+// Run Node Unit Test
+gulp.task('test-Server', shell.task(['mocha server/serverTests']));
