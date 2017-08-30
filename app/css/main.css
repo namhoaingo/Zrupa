@@ -10,3 +10,29 @@
 .text-underline{
 	text-decoration: underline;
 }
+
+.firstColumn{
+	width: 150px;
+
+}
+
+.contentColumn{
+	width: 350px;
+}
+
+td .row{
+	margin: 0;
+}
+
+td{
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.table-responsive{
+	margin: 0 10px;
+}
+
+.contentColumn .row div{
+	padding: 0	
+}
