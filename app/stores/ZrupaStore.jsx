@@ -60,6 +60,17 @@ function ZrupaStore(){
 		});
 	}
 
+	function deleteItem(deleteItem){
+		// call API to get Data
+		// Todo: convert to real thing 		
+		productApi.delete('/api/products', deleteItem.itemId).then(function(data){
+			items = _.reject(items, function(item){
+				return item.id == deleteItem.itemId;
+			})
+			triggerListeners();
+		});
+	}
+
 	function onChange(listener){
 		listeners.push(listener);
 	}
@@ -78,6 +89,9 @@ function ZrupaStore(){
 				case "add":
 					validate(event.payload);
 					break;
+				case "delete":
+					deleteItem(event.payload);
+					break;
 			}
 		}
 	})
@@ -88,9 +102,10 @@ function ZrupaStore(){
 	});
 	return {
 		getItems: getItems,
-		getValidationsResult: getValidationsResult,
 		onChange: onChange,
-
+		deleteItem: deleteItem,
+		getValidationsResult: getValidationsResult,
+		items: items
 	}
 }
 

@@ -22,5 +22,16 @@ module.exports = {
 				error: error
 			})
 		})
-	}
+	},
+
+	delete: function(url, itemId){
+		return new Promise(function(success, error){
+			$.ajax({
+				url: url + "/" + itemId,
+				type: "DELETE",
+				success: success,
+				error: error
+			})
+		})
+	},
 }
