@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var action = require('./../actions/ZrupaAction.jsx');
 
+
 module.exports = React.createClass({
 	deleteItem :function(){
 		action.delete({itemId: this.props.itemId});

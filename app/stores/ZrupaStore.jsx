@@ -1,11 +1,13 @@
 var dispatcher = require('./../dispatcher.jsx');
 var productApi = require('./../apiHelper/productsAPI.js');
+var enums = require('./../../shared/Enums.js');
 var _ = require("underscore");
 var validator = require("validator");
 
 function ZrupaStore(){
 	var items = {}; 	
 	var validationResults = [];
+	var deleteErrorMessage = {};
 
 	var listeners = [];
 
@@ -26,7 +28,7 @@ function ZrupaStore(){
 			{
 				validationResults.push({
 					productUrl: url,
-					validationResult: "Invalid URL"
+					validationResult: enums.AddErrorCode.InvalidUrl
 				})
 			}
 
@@ -34,7 +36,7 @@ function ZrupaStore(){
 			{
 				validationResults.push({
 					productUrl: url,
-					validationResult: "Duplicate URL"
+					validationResult: enums.AddErrorCode.DuplicateUrl
 				})
 			}
 		})
@@ -50,7 +52,6 @@ function ZrupaStore(){
 
 	}
 
-
 	function addItem(item){
 		// call API to get Data
 		// Todo: convert to real thing 		
@@ -61,14 +62,19 @@ function ZrupaStore(){
 	}
 
 	function deleteItem(deleteItem){
-		// call API to get Data
-		// Todo: convert to real thing 		
-		productApi.delete('/api/products', deleteItem.itemId).then(function(data){
-			items = _.reject(items, function(item){
-				return item.id == deleteItem.itemId;
-			})
-			triggerListeners();
-		});
+		// call API to get Data	
+		productApi.delete('/api/products', deleteItem.itemId)
+			.then(function(data){
+				items = _.reject(items, function(item){
+					return item.id == deleteItem.itemId;
+				})
+
+				triggerListeners();
+			}
+			,function(error){
+				deleteErrorMessage = error
+			}
+		)
 	}
 
 	function onChange(listener){
@@ -104,8 +110,7 @@ function ZrupaStore(){
 		getItems: getItems,
 		onChange: onChange,
 		deleteItem: deleteItem,
-		getValidationsResult: getValidationsResult,
-		items: items
+		getValidationsResult: getValidationsResult
 	}
 }
 

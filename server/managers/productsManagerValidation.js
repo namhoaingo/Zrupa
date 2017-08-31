@@ -1,4 +1,5 @@
 var validator = require('validator');
+var productManagers = require('./productsManager.js');
 var _ = require('underscore');
 
 module.exports = {
@@ -15,5 +16,13 @@ module.exports = {
 		})
 
 		return validationResults; 
+	},
+
+	isDeletable: function(url){
+		if (!url)
+		{
+			return false;
+		}
+		return _.where(productManagers.getResults(), {id: url}).length > 0
 	}
 }

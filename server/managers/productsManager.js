@@ -1,15 +1,58 @@
 var scrape = require('scrape-it');
 var _ = require('underscore');
+var guid = require('guid');
 
-module.exports = {
-	scrapProductUrl: function(productUrls){
+function ProductManager(){
+
+	var results = [{
+				id: guid.raw(),
+				productUrl: "ProductLink",
+				productName: "ProductName",
+				image: "Image",
+				warranty_term: "Warranty Term",
+				warranty_type: "Warranty Type",
+				productContent: [
+									{
+										content: "Product Content"
+									}
+								],
+				price: "Price",
+				whatInTheBox: 	[
+									{
+										content: "What in the Box"
+									}
+								],
+				specs: 	[
+							{
+								specName: "Specifications",								
+							}
+						]
+			}];
+
+	function getResults(){
+		return results;
+	}
+
+	function addResult(data){
+		results.push(data);
+	}
+
+	function deleteResult(url){
+		var newResults = _.reject(results, function(item){
+				return item.id == url;
+			})
+		results = newResults;
+		return results;
+	}
+
+	function scrapProductUrl(productUrls){
 			var inputs = _.where(productUrls, {isUrl: true});
 			//var inputs = ['http://www.lazada.sg/apple-iphone-7-plus-128gb-jet-black-8629928.html','http://www.lazada.sg/samsung-galaxy-s8-64gb-midnight-black-18155589.html']
 			 var selector = {			 	
 				productName: '.prod_header_main .prod_header_title h1',
 				image: {
-					selector: 'img.itm-img',
-					attr: 'src'
+					selector: 'div.productImage',
+					attr: 'data-swap-image'
 				},
 				warranty_term: '.prod_brief .prod-warranty .prod-warranty__term',
 				warranty_type: '.prod_brief .prod-warranty .prod-warranty__type',
@@ -87,6 +130,15 @@ module.exports = {
 				);				
 			})
 			
-				return promises;
+		return promises;
+	}
+
+	return {
+		scrapProductUrl: scrapProductUrl,
+		getResults: getResults,
+		addResult: addResult,
+		deleteResult: deleteResult
 	}
 }
+
+module.exports = new ProductManager();

@@ -15,7 +15,6 @@ module.exports = React.createClass({
 
 	componentDidMount: function(){
     	ZrupaStore.onChange(function(validationResults, items){
-    		console.log("onchange");			
 			if(validationResults.length == 0){
 				this.setState({items:items});	
 			}
@@ -32,189 +31,191 @@ module.exports = React.createClass({
     },    
 
     renderReady: function(){
+
+
     	return (
 				<div className='table-responsive'>
-				<table >
-									<thead>
-									<tr>									
-									{
-										this.state.items.map(function(item, index){
-											if(index == 0)
-											{
-												return (
-													<th className="firstColumn">
-														<div key={item.id}>
-														
-														</div>	
-													</th>																			
-												)		
-											}
-											else{
-												return (
-													<th className="contentColumn">
-														<div key={item.id}>
-															<Controllers itemId={item.id}/>
-														</div>
-													</th>
-												)	
-											}											
-										}.bind(this))	
-									}
-									</tr>
-									</thead>									
-									<tbody>
-										<tr>
-		                                    {
-		                                        this.state.items.map(function(item, index){
-		                                            if(index == 0)
-		                                            {
-		                                                return (
-		                                                <td className="firstColumn">
-			                                                <div key={item.productUrl}>
-			                                                    <div> Link </div>
-			                                                </div>
-		                                                </td>
-		                                                )       
-		                                            }
-		                                            else{
-		                                                return (
-		                                                <td className="contentColumn">
-			                                                <div key={item.productUrl}>
-			                                                    <a href={item.productUrl} target="_blank"> Link </a>
-			                                                </div>
-		                                                </td>
-		                                            )   
-		                                            }
+				<table>
+						<thead>
+						<tr className="borderTop">									
+						{
+							this.state.items.map(function(item, index){
+								if(index == 0)
+								{
+									return (
+										<th className="firstColumn text-center">
+											<div key={item.id}>
+											
+											</div>	
+										</th>																			
+									)		
+								}
+								else{
+									return (
+										<th className="contentColumn text-center">
+											<div key={item.id}>
+												<Controllers itemId={item.id}/>
+											</div>
+										</th>
+									)	
+								}											
+							}.bind(this))	
+						}
+						</tr>
+						</thead>									
+						<tbody>
+							<tr>
+                                {
+                                    this.state.items.map(function(item, index){
+                                        if(index == 0)
+                                        {
+                                            return (
+                                            <td className="firstColumn">
+                                                <div key={item.productUrl}>
+                                                    <div> Link </div>
+                                                </div>
+                                            </td>
+                                            )       
+                                        }
+                                        else{
+                                            return (
+                                            <td className="contentColumn">
+                                                <div key={item.productUrl}>
+                                                    <a href={item.productUrl} target="_blank"> Link to Product Page</a>
+                                                </div>
+                                            </td>
+                                        )   
+                                        }
 
 
-		                                        }.bind(this))   
-		                                    }
-	                                    </tr>
+                                    }.bind(this))   
+                                }
+                            </tr>
 
-	                                    <tr>
+                            <tr>
+                        {
+                            this.state.items.map(function(item, index){                                     
+                                if(index==0)
                                     {
-                                        this.state.items.map(function(item, index){                                     
-                                            if(index==0)
-                                                {
-                                                    return(
-                                                    	<td className="firstColumn">
-	                                                        <div key="titleImage">
-	                                                            <div>
-	                                                                {item.image}
-	                                                            </div>
-	                                                        </div>
-                                                        </td>
-                                                        )
-                                                }
-                                                else
-                                                {
+                                        return(
+                                        	<td className="firstColumn">
+                                                <div key="titleImage">
+                                                    <div>
+                                                        {item.image}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            )
+                                    }
+                                    else
+                                    {
+                                        return (
+                                            <td className="contentColumn">
+                                                <div  key={'actualImage_'+item.productName}>                                                           
+                                                    <div>                                                             
+                                                        <img src={item.image}/>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        )
+                                    }                                           
+                            }.bind(this))   
+                        }
+                        </tr>
+
+                        <tr>
+                        {
+                            this.state.items.map(function(item, index){
+                                return (
+                                	<td className={index==0? 'firstColumn' : 'contentColumn'}>
+                                        <div key={'warranty_term'+item.productName}>
+                                            <div> {item.warranty_term}</div>
+                                        </div>
+                                    </td>
+                                )   
+                            }.bind(this))   
+                        }
+                        </tr>
+
+                        <tr>
+                        {
+                            this.state.items.map(function(item, index){                                       
+                                return (
+                                    <td className={index==0? 'firstColumn' : 'contentColumn'} key={"warranty_type" + item.productName}>
+                                        <div> {item.warranty_type}</div>
+                                    </td>                                                                               
+                                )   
+                            }.bind(this))   
+                        }                                    
+                        </tr>
+
+                         <tr>
+                        {
+                            this.state.items.map(function(item, index){
+                                return (
+                                    <td className={index==0? 'firstColumn' : 'contentColumn'} key={"productContent" + item.productName}>                                                   
+                                        {
+                                            item.productContent.map(function(productContentData, index){                                                           
                                                     return (
-	                                                    <td className="contentColumn">
-	                                                        <div  key={'actualImage_'+item.productName}>                                                           
-	                                                            <div>                                                             
-	                                                                <img src={item.image}/>
-	                                                            </div>
-	                                                        </div>
-                                                        </td>
+                                                        <div key={productContentData.content}>
+                                                            {productContentData.content}
+                                                        </div>
                                                     )
-                                                }                                           
-                                        }.bind(this))   
-                                    }
-                                    </tr>
+                                            })                                                       
+                                        }
+                                    </td>                                                                               
+                                )   
+                            }.bind(this))   
+                        }
+                        </tr>
 
-                                    <tr>
-                                    {
-                                        this.state.items.map(function(item, index){
-                                            return (
-                                            	<td className={index==0? 'firstColumn' : 'contentColumn'}>
-	                                                <div key={'warranty_term'+item.productName}>
-	                                                    <div> {item.warranty_term}</div>
-	                                                </div>
-                                                </td>
-                                            )   
-                                        }.bind(this))   
-                                    }
-                                    </tr>
-
-                                    <tr>
-                                    {
-                                        this.state.items.map(function(item, index){                                       
-                                            return (
-                                                <td className={index==0? 'firstColumn' : 'contentColumn'} key={"warranty_type" + item.productName}>
-                                                    <div> {item.warranty_type}</div>
-                                                </td>                                                                               
-                                            )   
-                                        }.bind(this))   
-                                    }                                    
-                                    </tr>
-
-                                     <tr>
-                                    {
-                                        this.state.items.map(function(item, index){
-                                            return (
-                                                <td className={index==0? 'firstColumn' : 'contentColumn'} key={"productContent" + item.productName}>                                                   
-                                                    {
-                                                        item.productContent.map(function(productContentData, index){                                                           
-                                                                return (
-                                                                    <div key={productContentData.content}>
-                                                                        {productContentData.content}
-                                                                    </div>
-                                                                )
-                                                        })                                                       
-                                                    }
-                                                </td>                                                                               
-                                            )   
-                                        }.bind(this))   
-                                    }
-                                    </tr>
-
-                                      <tr>
-                                    {
-                                        this.state.items.map(function(item, index){
-                                            if(index == 0)
+                          <tr>
+                        {
+                            this.state.items.map(function(item, index){
+                                if(index == 0)
+                                {
+                                    return (
+                                        <td className="firstColumn" key={"specs" + item.productName}>                                                   
                                             {
-                                                return (
-                                                    <td className="firstColumn" key={"specs" + item.productName}>                                                   
-                                                        {
-                                                            item.specs.map(function(spec, index){
-                                                                return (
-                                                                    <div key={item.productName + spec.specName} className="text-bold">
-                                                                        {spec.specName}
-                                                                    </div>   
-                                                                )   
-                                                            })                                           
-                                                        }
-                                                    </td>           
-                                                )   
+                                                item.specs.map(function(spec, index){
+                                                    return (
+                                                        <div key={item.productName + spec.specName} className="text-bold">
+                                                            {spec.specName}
+                                                        </div>   
+                                                    )   
+                                                })                                           
                                             }
-                                            else
-                                            {
-                                                return (
-                                                <td className="contentColumn" key={"specs" + item.productName}>                                                   
-                                                    {
-                                                        item.specs.map(function(spec, index){
+                                        </td>           
+                                    )   
+                                }
+                                else
+                                {
+                                    return (
+                                    <td className="contentColumn" key={"specs" + item.productName}>                                                   
+                                        {
+                                            item.specs.map(function(spec, index){
 
-                                                                return (
-                                                                    <div className="row">
-                                                                        <div className="col-md-4 text-underline" key={item.productName + spec.specName}>
-                                                                            {spec.specName}
-                                                                        </div>
-                                                                        <div className="col-md-8" key={item.productName + spec.specDetail}>
-                                                                            {spec.specDetail}
-                                                                        </div>
-                                                                    </div>
-                                                                )
-                                                        })                                                       
-                                                    }
-                                                </td>                                                                               
-                                                )   
-                                            }
+                                                    return (
+                                                        <div className="row">
+                                                            <div className="col-md-4 text-underline" key={item.productName + spec.specName}>
+                                                                {spec.specName}
+                                                            </div>
+                                                            <div className="col-md-8" key={item.productName + spec.specDetail}>
+                                                                {spec.specDetail}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                            })                                                       
+                                        }
+                                    </td>                                                                               
+                                    )   
+                                }
 
-                                        })   
-                                    }   
-                    				</tr>
+                            })   
+                        }   
+        				</tr>
 
-									</tbody>					
+						</tbody>					
 					</table>
 				</div>
 
@@ -222,7 +223,7 @@ module.exports = React.createClass({
     },
 
 	render: function(){
-		if(_.isEmpty(this.state.items)){
+		if(_.isEmpty(this.state.items) || this.state.items.length == 1){
 			return this.renderPleaseEnterUrl()
 		}		
 		else{

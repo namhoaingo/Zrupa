@@ -13,6 +13,8 @@
 
 .firstColumn {
   width: 150px;
+  position: absolute;
+  left: 10px;
 }
 
 .contentColumn {
@@ -23,9 +25,9 @@ td .row {
   margin: 0;
 }
 
-td {
-  padding-top: 10px;
-  padding-left: 10px;
+td,
+th {
+  padding: 10px 0 10px 10px;
 }
 
 .table-responsive {
@@ -34,4 +36,23 @@ td {
 
 .contentColumn .row div {
   padding: 0;
+}
+
+tr {
+  border-bottom: 0.5px solid #0074D9;
+}
+
+.borderTop {
+  border-top: 0.5px solid #0074D9;
+}
+
+.jumbotron {
+  padding-top: 28px;
+  padding-bottom: 28;
+}
+
+.table-responsive {
+  margin-top: 30px;
+  overflow-x: scroll;
+  margin-left: 150px;
 }

@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDom = require('react-dom');
-var Search = require('./Search.jsx')
+var Search = require('./Search.jsx');
+var ValidationResult = require('./ValidationResult.jsx');
 
 module.exports = React.createClass({	
 	render: function(){
@@ -12,8 +13,9 @@ module.exports = React.createClass({
 					<div className="row">
 							<div className="col-md-10 col-md-offset-1">
 								<Search/>
-						</div>	
-					</div>
+								<ValidationResult/>		
+							</div>	
+					</div>					
 				</div>
 			)
 	}	
