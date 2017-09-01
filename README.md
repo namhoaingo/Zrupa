@@ -7,5 +7,7 @@ This application enable compare the price of different phone urls from Lazada we
 ### Usage:
 '''
 npm install
+'''
+'''
 gulp
 ''' 
