@@ -21,7 +21,7 @@ module.exports = React.createClass({
 		return (
 				<div>
 					<form onSubmit={this.addItem}>
-					<input id='search-box' value={this.state.input} onChange={this.handleInput}/>
+					<input id='search-box' value={this.state.input} onChange={this.handleInput} placeholder="    Enter Urls (comma seperated)"/>
 					<button> Add Item </button>
 			</form>
 				</div>

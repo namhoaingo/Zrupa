@@ -179,7 +179,7 @@ module.exports = React.createClass({
                                             {
                                                 item.specs.map(function(spec, index){
                                                     return (
-                                                        <div key={item.productName + spec.specName} className="text-bold">
+                                                        <div key={item.productName + spec.specName}>
                                                             {spec.specName}
                                                         </div>   
                                                     )   

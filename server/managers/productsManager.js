@@ -46,8 +46,7 @@ function ProductManager(){
 	}
 
 	function scrapProductUrl(productUrls){
-			var inputs = _.where(productUrls, {isUrl: true});
-			//var inputs = ['http://www.lazada.sg/apple-iphone-7-plus-128gb-jet-black-8629928.html','http://www.lazada.sg/samsung-galaxy-s8-64gb-midnight-black-18155589.html']
+			var inputs = _.where(productUrls, {isUrl: true});			
 			 var selector = {			 	
 				productName: '.prod_header_main .prod_header_title h1',
 				image: {

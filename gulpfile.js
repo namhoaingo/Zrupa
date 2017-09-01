@@ -4,7 +4,6 @@ var browserSync = require('browser-sync');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
-var concatCss = require('gulp-concat-css');
 var less = require('gulp-less');
 var shell = require('gulp-shell');
 
@@ -28,19 +27,13 @@ gulp.task('bundle', function(){
 	.pipe(gulp.dest('./temp'));
 })
 
-gulp.task('css', function(){
-	return gulp.src('app/css/*.css')
-			.pipe(concatCss('main.css'))
-			.pipe(gulp.dest('./temp/css'))
-})
-
 gulp.task('less', function(){
 		gulp.src('app/less/*.less')
 		.pipe(less())
 		.pipe(gulp.dest('./temp/css'))
 })
 
-gulp.task('default', ['bundle','css','live-server', 'less'], function(){
+gulp.task('default', ['bundle','less','live-server', 'test-Server'], function(){
 	browserSync.init(null, {
 		proxy:"http://localhost:8686",
 		port:8687
