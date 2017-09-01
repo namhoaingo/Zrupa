@@ -5,9 +5,9 @@ This application enable compare the price of different phone urls from Lazada we
 	* http://www.lazada.sg/samsung-galaxy-s8-64gb-midnight-black-18155589.html
 
 ### Usage:
-'''
+```
 npm install
-'''
-'''
+```
+```
 gulp
-''' 
+``` 
