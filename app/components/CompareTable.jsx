@@ -215,6 +215,18 @@ module.exports = React.createClass({
                         }   
         				</tr>
 
+        				   <tr>
+                        {
+                            this.state.items.map(function(item, index){                                       
+                                return (
+                                    <td className={index==0? 'firstColumn' : 'contentColumn'} key={"productPrice" + item.productName}>
+                                        <div className="text-center text-bold"> {"("+ item.currency + ")"}{item.price}</div>
+                                    </td>                                                                               
+                                )   
+                            }.bind(this))   
+                        }                                    
+                        </tr>
+
 						</tbody>					
 					</table>
 				</div>

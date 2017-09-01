@@ -17,6 +17,7 @@ function ProductManager(){
 									}
 								],
 				price: "Price",
+				currency: "Currency",					
 				whatInTheBox: 	[
 									{
 										content: "What in the Box"
@@ -61,6 +62,7 @@ function ProductManager(){
 						content: 'span'
 					},
 				price: '#special_price_box',
+				currency: '#special_currency_box',
 				whatInTheBox: 
 					{
 						lists: 'li.inbox__item', 
@@ -93,6 +95,8 @@ function ProductManager(){
 							    },
 							    warranty_type: selector.warranty_type,
 							    warranty_term: selector.warranty_term,
+							    price: selector.price,
+							    currency: selector.currency,
 							    productContent: {
 							    	listItem: selector.productContent.lists,
 							    	data:{
@@ -106,7 +110,7 @@ function ProductManager(){
 							    	listItem: selector.whatInTheBox.lists,
 							    	data:{
 							    		content: {
-							    			selector: selector.whatInTheBox.content
+							    			selector: selector.whatInTheBox.currency
 							    		}
 							    	}
 							    },
